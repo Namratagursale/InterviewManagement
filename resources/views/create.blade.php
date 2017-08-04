@@ -37,7 +37,7 @@ input[type=text], input[type=email] {
 </style>
 <body>
 <h2>Signup Form</h2>
-<form method="POST" action="user/posts">
+<form method="POST" action="{{url('user/posts')}}">
   {{ csrf_field() }}
   <div class="container">
     <div class="form-group">

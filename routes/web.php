@@ -15,17 +15,18 @@ Route::get('/', function () {
     return view('create');
 });
 
+  Route::post('/user/posts', 'Register\RegistrationController@store');
+	
+Route::get('/users/{user}', 'Register\RegistrationController@show');
 
-Route::post('/user/posts', 'Auth\RegisterController@store');
 
-Route::get('/users/{user}', 'Auth\RegisterController@show');
-
-// Route::group([
-//     'prefix' => config('backpack.base.route_prefix', 'admin'),
-//     'middleware' => ['admin'],
-//     'namespace' => 'Admin'
-// ], function() {
-//     // your CRUD resources and other admin routes here
-//     CRUD::resource('tag', 'TagCrudController');
-//     CRUD::resource('interviewer', 'InterviewerCrudController');
-// });
+Route::group([
+    'prefix' => config('backpack.base.route_prefix', 'admin'),
+    'middleware' => ['admin'],
+    'namespace' => 'Admin'
+], function() {
+    // your CRUD resources and other admin routes here
+    CRUD::resource('tag', 'TagCrudController');
+   
+   
+});
