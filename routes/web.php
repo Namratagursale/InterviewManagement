@@ -11,13 +11,19 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/register', function () {
     return view('create');
+});
+
+Route::get('/login', function () {
+    return view('login');
 });
 
   Route::post('/user/posts', 'Register\RegistrationController@store');
 	
-Route::get('/users/{user}', 'Register\RegistrationController@show');
+  Route::get('/users/{user}', 'Register\RegistrationController@show');
+
+  Route::post('/user/login', 'Register\EmployeeLoginController@doLogin');
 
 
 Route::group([
@@ -27,6 +33,7 @@ Route::group([
 ], function() {
     // your CRUD resources and other admin routes here
     CRUD::resource('tag', 'TagCrudController');
-   
-   
+    CRUD::resource('interviewer', 'InterviewerCrudController');
+    CRUD::resource('employee', 'EmployeeCrudController');
+
 });
