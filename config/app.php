@@ -185,6 +185,7 @@ return [
         Backpack\LangFileManager\LangFileManagerServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Backpack\BackupManager\BackupManagerServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*

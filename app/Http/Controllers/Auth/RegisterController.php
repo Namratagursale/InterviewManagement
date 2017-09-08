@@ -97,6 +97,30 @@ class RegisterController extends Controller
         return Response::json(['success'=>$result,'errormsg'=>$errormsg]);
     }
 
+    public function storeUser(){
+       // print_r("Here................");exit;
+        $result = false;
+        $errormsg = "";
+        try{
+        $result = Interviewer::create([
+                'name' => request('name'),
+                'email' => request('email'),
+                'position' => request('position'),
+                'experience'=> request('experience'),
+
+            ]);
+        }
+        catch(Exception $exception){
+             $errorCode = $exception->errorInfo[1];
+             $errormsg = 'Database error! ' . $exception->getCode();
+             if($errorCode == 1062){
+                $errormsg = 'Dublicate Entry';
+             }
+             
+        }
+        return Response::json(['success'=>$result,'errormsg'=>$errormsg]);
+    }
+
     public function index(){
         echo "hello";
         exit;
