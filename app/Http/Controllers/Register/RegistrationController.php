@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Register;
 
+use Auth;
 use App\User;
 use App\Models\Interviewer;
 use App\Http\Controllers\Controller;
@@ -13,6 +14,7 @@ use Response;
 class RegistrationController extends Controller
 {
     
+     public $successStatus = 200;
     /**
      * Get a validator for an incoming registration request.
      *
@@ -71,6 +73,7 @@ class RegistrationController extends Controller
        // print_r("Here................");exit;
         $result = false;
         $errormsg = "";
+        $token = "";
         try{
         $result = User::create([
                 'name' => request('name'),
@@ -79,6 +82,7 @@ class RegistrationController extends Controller
                 'experience'=> request('experience'),
                 'password'=> bcrypt(('password')),
             ]);
+       $token =  $result->createToken(request('name'))->accessToken;
         }
         catch(Exception $exception){
              $errorCode = $exception->errorInfo[1];
@@ -100,5 +104,16 @@ class RegistrationController extends Controller
         $user = User::find($id);
       //  return User::All();
         return $user;
+    }
+
+     /**
+     * details api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function details()
+    {
+        $user = Auth::user();
+        return response()->json(['success' => $user], $this->successStatus);
     }
 }

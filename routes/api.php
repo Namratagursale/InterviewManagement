@@ -25,5 +25,5 @@ Route::get('/users/{user}', 'Register\RegistrationController@show');
 Route::post('/user/postsUser', 'Register\RegistrationController@storeUser');
 
 Route::group(['middleware' => 'auth:api'], function(){
-	//Route::post('/user/postsUser', 'Register\RegistrationController@storeUser');
+	Route::get('/user/details', 'Register\RegistrationController@details');
 });
